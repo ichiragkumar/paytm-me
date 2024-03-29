@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
         console.log("1st 403");
         return res.status(403).json({});
     }
-    
+
     const token = authHeader.split(' ')[1];
 
     try {
@@ -20,6 +20,7 @@ const authMiddleware = (req, res, next) => {
         if(decoded.userId){
             req.userId = decoded.userId;
             console.log(req.userId);
+            console.log("going to req body");
             next();
         }else{
             console.log("2nd 403");
