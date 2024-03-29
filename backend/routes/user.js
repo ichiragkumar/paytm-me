@@ -68,10 +68,10 @@ router.post("/signup",async (req, res)=>{
 })
 
 
-router.post("./signin",async (req, res)=>{
+router.post("/signin",async (req, res)=>{
         const body = req.body
         const parsedSignIn = signInSchema.safeParse(body)
-        if(!parsedResult){
+        if(!parsedSignIn){
             return res.status(411).json({
                 message: " Incorrect inputs"
             })
@@ -91,6 +91,7 @@ router.post("./signin",async (req, res)=>{
         },JWT_SECRET)
 
         res.status(200).json({
+            message: "Login  Succesfully",
             token: token
         })
         return;
