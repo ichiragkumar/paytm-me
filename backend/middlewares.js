@@ -9,13 +9,13 @@ const authMiddleware = (req, res, next) => {
         console.log("1st 403");
         return res.status(403).json({});
     }
+    
     const token = authHeader.split(' ')[1];
 
     try {
-        console.log(token);
-        console.log(JWT_SECRET);
+        
         const decoded = jwt.verify(token, JWT_SECRET);
-        console.log(decoded);
+      
 
         if(decoded.userId){
             req.userId = decoded.userId;

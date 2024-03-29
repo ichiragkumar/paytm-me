@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken")
 const  { authMiddleware } = require("../middlewares");
 
 
-const { User } = require("../db");
+const { User,Account } = require("../db");
 const router = express.Router();
 
 
@@ -63,12 +63,22 @@ router.post("/signup",async (req, res)=>{
         firstName: req.body.firstName,
         lastName: req.body.lastName,
     })
+    const userId = dbUser._id
+
+    
+
+    // create bank account
+    await Account.create({
+        userId,
+        balance: 1 + Math.random() * 10000
+    })
 
 
-    const userId = user._id
     const token = jwt.sign({
         userId
     }, JWT_SECRET);
+
+    console.log(userId);
 
 
     res.status(201).json({
