@@ -2,6 +2,8 @@ const express = require('express');
 const zod = require("zod")
 const JWT_SECRET = require("../config")
 const jwt = require("jsonwebtoken")
+
+
 const { User } = require("../db");
 const router = express.Router();
 
@@ -43,7 +45,7 @@ router.post("/signup",async (req, res)=>{
 
     // now if checked , weather user inout is coorect and validation is fine
     // now create the user 
-    const dbUser = await User.createOne({
+    const dbUser = await User.create({
         username: req.body.username,
         password: req.body.password,
         firstName: req.body.firstName,
